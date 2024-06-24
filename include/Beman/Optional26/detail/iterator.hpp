@@ -8,7 +8,7 @@
 
 #include <iterator>
 
-namespace beman::optional::detail {
+namespace beman::optional26::detail {
 
 // This is a minimal contiguous iterator.  It uses stl_interfaces library from Boost
 // (current implementation based on https://wg21.link/P2727R4).
@@ -51,6 +51,6 @@ struct contiguous_iterator : stl_interfaces::iterator_interface<
     T* m_current;
 };
 
-} // namespace beman::optional::detail
+} // namespace beman::optional26::detail
 
 #endif // BEMAN_OPTIONAL26_DETAIL_ITERATOR_HPP

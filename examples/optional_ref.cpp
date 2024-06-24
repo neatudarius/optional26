@@ -5,7 +5,7 @@
 
 #include <string>
 
-using beman::optional::optional;
+using beman::optional26::optional;
 
 struct Cat {
     int catalog_index{0};
