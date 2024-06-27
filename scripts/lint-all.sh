@@ -17,7 +17,7 @@ BASE_DIRS=(
 )
 
 # Print usage information.
-function usage() {
+function print_usage() {
     echo "Usage: $0"
     echo "  -h, --help: Display help."
     echo "  -a, --all: Lint all files."
@@ -33,7 +33,7 @@ function parse_args() {
     while [[ $# -gt 0 ]]; do
         case $1 in
             -h|--help)
-                usage
+                print_usage
                 exit 0
                 ;;
             -a|--all)
@@ -62,7 +62,7 @@ function parse_args() {
                 ;;
             *)
                 echo "Unknown option: $1"
-                usage
+                print_usage
                 exit 1
                 ;;
         esac

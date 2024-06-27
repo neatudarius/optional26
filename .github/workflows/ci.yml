@@ -55,18 +55,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt-get install g++-14
-      - name: Configure
+      - name: Run tests
         run: |
-          rm -rf .build
-          mkdir -p .build
-          cd .build
-          echo ${{ matrix.config.cmake_args }}
-          echo ${{ matrix.config.toolchain }}
-          cmake ${{ matrix.config.cmake_args }} -DCMAKE_TOOLCHAIN_FILE=etc/${{ matrix.config.toolchain }} -B . -S ..
-      - name: Build
-        run: |
-          cmake --build .build --config Asan --target all -- -k 0
-      - name: Test
-        run: |
-          cd .build
-          ctest --output-on-failure
+          set -x
+          scripts/run_tests.sh --fresh --preset ${{matrix.config.toolchain}} --verbose
