@@ -5,7 +5,7 @@
 Run all linters on codebase example:
 
 ```shell
-$ scripts/lint-all.sh -h
+$ scripts/lint.sh -h
 Usage: scripts/lint-all.sh
   -h, --help: Display help.
   -a, --all: Lint all files.
@@ -15,7 +15,7 @@ Usage: scripts/lint-all.sh
   -y, --yaml: Lint YAML files.
   -C, --cmake: Lint CMake files.
 
-$ scripts/lint-all.sh --all
+$ scripts/lint.sh --all
 Checking linters...
  -> clang-format...
  -> shellcheck...

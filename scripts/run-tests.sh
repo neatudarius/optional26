@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# scripts/run-tests.sh -*-shell-*-
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 # Run tests on all known toolchains.
