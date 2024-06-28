@@ -12,9 +12,9 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {name: "Ubuntu Clang 19|C++20", os: ubuntu-24.04, toolchain: clang-19, std: 20, cmake_config: RelWithDebInfo, clang_version: 19, installed_clang_version: 18}
-          - {name: "Ubuntu Clang 19|C++23", os: ubuntu-24.04, toolchain: clang-19, std: 23, cmake_config: RelWithDebInfo, clang_version: 19, installed_clang_version: 18}
-          - {name: "Ubuntu Clang 19|C++26", os: ubuntu-24.04, toolchain: clang-19, std: 26, cmake_config: RelWithDebInfo, clang_version: 19, installed_clang_version: 18}
+          - {name: "Ubuntu Clang 19|C++20", os: ubuntu-24.04, toolchain: clang-19, std: 20, cmake_config: Asan, clang_version: 19, installed_clang_version: 18}
+          - {name: "Ubuntu Clang 19|C++23", os: ubuntu-24.04, toolchain: clang-19, std: 23, cmake_config: Asan, clang_version: 19, installed_clang_version: 18}
+          - {name: "Ubuntu Clang 19|C++26", os: ubuntu-24.04, toolchain: clang-19, std: 26, cmake_config: Asan, clang_version: 19, installed_clang_version: 18}
 
 
           - {name: "Ubuntu Clang 18|C++20", os: ubuntu-24.04, toolchain: clang-18, std: 20, cmake_config: Asan, clang_version: 18, installed_clang_version: 18}

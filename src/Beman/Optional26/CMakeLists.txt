@@ -48,4 +48,10 @@ target_link_libraries(optional_test gtest)
 target_link_libraries(optional_test gtest_main)
 
 include(GoogleTest)
-gtest_discover_tests(optional_test)
+enable_testing()
+gtest_add_tests(optional_test "" AUTO)
+# gtest_discover_tests(optional_test)
+# gtest_discover_tests(optional_test PROPERTIES TIMEOUT 600)
+# gtest_discover_tests(optional_test PROPERTIES TEST_DISCOVERY_TIMEOUT 600)
+
+

@@ -163,8 +163,11 @@ function test_with_toolchain() {
     run_command "${cmd}" "build"  "build failed" "build successful" || return 1
 
     # Run tests.
+    examples/Asan/pythagorean_triple
+    examples/Asan/std_vs_beman
     cd "${BUILD_DIR}"
-    cmd="ctest --output-on-failure"
+    export ASAN_OPTIONS=new_delete_type_mismatch=0
+    cmd="ctest --build-config \"${CMAKE_CONFIGURATION}\" --output-on-failure"
     run_command "${cmd}" "tests"  "tests failed" "tests passed" || return 1
     cd ..
 }
