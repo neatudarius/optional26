@@ -83,8 +83,7 @@ void test_constructors_dangling() {
     beman::optional::optional<const std::string&> o11 = std::move(t6);
 
     auto&& t7 = makeCRefToOptionalRefWrap(); // std::optional<std::reference_wrapper<T>> cv &
-    static_assert(
-        std::is_same_v<decltype(t7), const beman::optional::optional<std::reference_wrapper<std::string>>&>);
+    static_assert(std::is_same_v<decltype(t7), const beman::optional::optional<std::reference_wrapper<std::string>>&>);
     beman::optional::optional<std::string&>       o12 = t7;
     beman::optional::optional<const std::string&> o13 = t7;
 
