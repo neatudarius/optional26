@@ -1,4 +1,4 @@
-// src/beman/optional/tests/test_constructor_fail.t.cpp             -*-C++-*-
+// tests/beman/optional/test_constructor_fail.t.cpp             -*-C++-*-
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 #include <beman/optional/optional.hpp>

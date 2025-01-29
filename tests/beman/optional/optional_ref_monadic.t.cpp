@@ -1,4 +1,4 @@
-// src/beman/optional/tests/optional_ref_monadic.t.cpp -*-C++-*-
+// tests/beman/optional/optional_ref_monadic.t.cpp -*-C++-*-
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 #include <beman/optional/optional.hpp>
