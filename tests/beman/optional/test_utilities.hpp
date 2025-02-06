@@ -1,8 +1,8 @@
-// src/beman/optional/tests/test_utilities.hpp                      -*-C++-*-
+// tests/beman/optional/test_utilities.hpp                      -*-C++-*-
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-#ifndef BEMAN_OPTIONAL_TESTS_TEST_UTILITIES_HPP
-#define BEMAN_OPTIONAL_TESTS_TEST_UTILITIES_HPP
+#ifndef TESTS_BEMAN_OPTIONAL_TEST_UTILITIES_HPP
+#define TESTS_BEMAN_OPTIONAL_TEST_UTILITIES_HPP
 
 namespace beman::optional::tests {
 /***
@@ -12,4 +12,4 @@ namespace beman::optional::tests {
 auto consteval constify(auto expr) { return (expr); }
 } // namespace beman::optional::tests
 
-#endif
+#endif // TESTS_BEMAN_OPTIONAL_TEST_UTILITIES_HPP

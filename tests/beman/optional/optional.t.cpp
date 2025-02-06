@@ -1,11 +1,11 @@
-// src/beman/optional/tests/optional.t.cpp                      -*-C++-*-
+// tests/beman/optional/optional.t.cpp                      -*-C++-*-
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 #include <beman/optional/optional.hpp>
 
 #include <beman/optional/optional.hpp> // test 2nd include OK
 
-#include <beman/optional/tests/test_types.hpp>
+#include <beman/optional/test_types.hpp>
 
 #include <functional>
 #include <ranges>

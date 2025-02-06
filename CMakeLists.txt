@@ -46,10 +46,13 @@ if(OPTIONAL_ENABLE_TESTING)
     add_executable(beman_optional_test)
     target_sources(
         beman_optional_test
-        PRIVATE FILE_SET beman_optional_test_headers TYPE HEADERS BASE_DIRS src
+        PRIVATE
+            FILE_SET beman_optional_test_headers
+            TYPE HEADERS
+            BASE_DIRS tests
     )
 
-    add_subdirectory(src/beman/optional/tests)
+    add_subdirectory(tests/beman/optional)
 endif()
 
 add_subdirectory(include/beman/optional)

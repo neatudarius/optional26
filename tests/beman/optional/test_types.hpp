@@ -1,8 +1,8 @@
-// src/beman/optional/tests/test_types.h -*-C++-*-
+// tests/beman/optional/test_types.h -*-C++-*-
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-#ifndef BEMAN_OPTIONAL_TESTS_TEST_TYPES_HPP
-#define BEMAN_OPTIONAL_TESTS_TEST_TYPES_HPP
+#ifndef TESTS_BEMAN_OPTIONAL_TEST_TYPES_HPP
+#define TESTS_BEMAN_OPTIONAL_TEST_TYPES_HPP
 
 #include <compare>
 
@@ -111,4 +111,4 @@ struct explicitly_convertible_from_const_lvalue_only {
 
 } // namespace beman::optional::tests
 
-#endif // BEMAN_OPTIONAL_TESTS_TEST_TYPES_HPP
+#endif // TESTS_BEMAN_OPTIONAL_TEST_TYPES_HPP

@@ -1,4 +1,4 @@
-// src/beman/optional/tests/optional_range_support.t.cpp -*-C++-*-
+// tests/beman/optional/optional_range_support.t.cpp -*-C++-*-
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 /**
@@ -13,7 +13,7 @@
 #include <gtest/gtest.h>
 
 #include <beman/optional/detail/iterator.hpp>
-#include <beman/optional/tests/test_types.hpp>
+#include <beman/optional/test_types.hpp>
 
 #include <algorithm>
 #include <concepts>
