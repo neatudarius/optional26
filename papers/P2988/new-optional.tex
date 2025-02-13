@@ -1079,7 +1079,7 @@ constexpr optional(nullopt_t) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Equivalent to
+Equivalent to:
 \begin{codeblock}
 @\exposid{val} = nullptr;
 \end{codeblock}
@@ -1095,8 +1095,8 @@ constexpr explicit optional(in_place_t, Arg&& arg);
   \pnum
   \constraints
   \begin{itemize}
-  \item \tcode{is_constructible_v<T\&, remove_cv_t<Arg>>} is \tcode{true}
-  \item \tcode{reference_constructs_from_temporary_v<T\&, Arg>)} is \tcode{false}
+  \item \tcode{is_constructible_v<T\&, remove_cv_t<Arg>>} is \tcode{true}, and
+  \item \tcode{reference_constructs_from_temporary_v<T\&, Arg>)} is \tcode{false}.
   \end{itemize}
 
   \pnum
@@ -1114,9 +1114,9 @@ template <class U>
   \pnum
   \constraints
   \begin{itemize}
-  \item \tcode{is_constructible_v<T\&, U>} is \tcode{true}
-  \item \tcode{(is_same_v<remove_cvref_t<U>, in_place_t>)} is \tcode{false}
-  \item \tcode{(is_same_v<remove_cvref_t<U>, optional>)} is \tcode{false}
+  \item \tcode{is_constructible_v<T\&, U>} is \tcode{true},
+  \item \tcode{(is_same_v<remove_cvref_t<U>, in_place_t>)} is \tcode{false}, and
+  \item \tcode{(is_same_v<remove_cvref_t<U>, optional>)} is \tcode{false}.
   \end{itemize}
 
   \pnum
@@ -1151,14 +1151,14 @@ constexpr explicit(@\seebelow@) optional(optional<U>& rhs) noexcept(@\seebelow@)
   \pnum
   \constraints
   \begin{itemize}
-  \item \tcode{is_constructible_v<T\&, U\&>} is \tcode{true}
-  \item \tcode{std::is_same_v<remove_cv_t<T>, optional<U>>} is \tcode{false}
-  \item \tcode{std::is_same_v<T\&, U>} is \tcode{false}
+  \item \tcode{is_constructible_v<T\&, U\&>} is \tcode{true},
+  \item \tcode{std::is_same_v<remove_cv_t<T>, optional<U>>} is \tcode{false}, and
+  \item \tcode{std::is_same_v<T\&, U>} is \tcode{false}.
   \end{itemize}
 
   \pnum
   \effects
-  Equivalent to
+  Equivalent to:
   \begin{codeblock}
 if (rhs.has_value()) {
     @\exposid{val}@ = addressof(static_cast<T&>(*rhs));
@@ -1194,14 +1194,14 @@ constexpr explicit(@\seebelow@) optional(const optional<U>& rhs) noexcept(@\seeb
   \pnum
   \constraints
   \begin{itemize}
-  \item \tcode{is_constructible_v<T\&, const U\&>} is \tcode{true}
-  \item \tcode{std::is_same_v<remove_cv_t<T>, optional<U>>} is \tcode{false}
-  \item \tcode{std::is_same_v<T\&, U>} is \tcode{false}
+  \item \tcode{is_constructible_v<T\&, const U\&>} is \tcode{true},
+  \item \tcode{std::is_same_v<remove_cv_t<T>, optional<U>>} is \tcode{false}, and
+  \item \tcode{std::is_same_v<T\&, U>} is \tcode{false}.
   \end{itemize}
 
   \pnum
   \effects
-  Equivalent to
+  Equivalent to:
   \begin{codeblock}
 if (rhs.has_value()) {
     @\exposid{val}@ = addressof(static_cast<T&>(*rhs));
@@ -1238,14 +1238,14 @@ constexpr explicit(@\seebelow@) optional(optional<U>&& rhs) noexcept(@\seebelow@
   \pnum
   \constraints
   \begin{itemize}
-  \item \tcode{is_constructible_v<T\&, U>} is \tcode{true}
-  \item \tcode{std::is_same_v<remove_cv_t<T>, optional<U>>} is \tcode{false}
-  \item \tcode{std::is_same_v<T\&, U>} is \tcode{false}
+  \item \tcode{is_constructible_v<T\&, U>} is \tcode{true},
+  \item \tcode{std::is_same_v<remove_cv_t<T>, optional<U>>} is \tcode{false}, and
+  \item \tcode{std::is_same_v<T\&, U>} is \tcode{false}.
   \end{itemize}
 
   \pnum
   \effects
-  Equivalent to
+  Equivalent to:
   \begin{codeblock}
 if (rhs.has_value()) {
     @\exposid{val}@ = addressof(static_cast<T&>(*std::move(rhs)));
@@ -1280,14 +1280,14 @@ constexpr explicit(@\seebelow@) optional(const optional<U>&& rhs) noexcept(@\see
   \pnum
   \constraints
   \begin{itemize}
-  \item \tcode{is_constructible_v<T\&, const U>} is \tcode{true}
-  \item \tcode{std::is_same_v<remove_cv_t<T>, optional<U>>} is \tcode{false}
-  \item \tcode{std::is_same_v<T\&, U>} is \tcode{false}
+  \item \tcode{is_constructible_v<T\&, const U>} is \tcode{true},
+  \item \tcode{std::is_same_v<remove_cv_t<T>, optional<U>>} is \tcode{false}, and
+  \item \tcode{std::is_same_v<T\&, U>} is \tcode{false}.
   \end{itemize}
 
   \pnum
   \effects
-  Equivalent to
+  Equivalent to:
   \begin{codeblock}
 if (rhs.has_value()) {
     @\exposid{val}@ = addressof(static_cast<T&>(std::move(*rhs)));
@@ -1323,7 +1323,7 @@ constexpr optional& operator=(nullopt_t) noexcept;
 \begin{itemdescr}
   \pnum
   \effects
-  Equivalent to
+  Equivalent to:
   \begin{codeblock}
 @\exposid{val}@ = nullptr;
   \end{codeblock}
@@ -1343,8 +1343,8 @@ constexpr T& emplace(U&& u) noexcept(@\seebelow@);
   \pnum
   \constraints
   \begin{itemize}
-    \item \tcode{is_constructible_v<T\&, U>} is \tcode{true}
-    \item \tcode{reference_constructs_from_temporary_v<T\&, U>} is \tcode{false}
+    \item \tcode{is_constructible_v<T\&, U>} is \tcode{true}, and
+    \item \tcode{reference_constructs_from_temporary_v<T\&, U>} is \tcode{false}.
   \end{itemize}
 
   \pnum
@@ -1369,7 +1369,7 @@ constexpr void swap(optional& rhs) noexcept;
 \begin{itemdescr}
   \pnum
   \effects
-  Equivalent to
+  Equivalent to:
   \begin{codeblock}
 std::swap(@\exposid{val}@, rhs.@\exposid{val}@);
   \end{codeblock}
@@ -1596,7 +1596,7 @@ constexpr void reset() noexcept;
 \begin{itemdescr}
   \pnum
   \effects
-  Equivalent to
+  Equivalent to:
   \begin{codeblock}
   @\exposid{val}@ = nullptr;
   \end{codeblock}
