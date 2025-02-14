@@ -72,10 +72,33 @@ TEST(OptionalRefTest, Constructors) {
     EXPECT_FALSE(tempint);
 }
 
+namespace {
+// https://gcc.godbolt.org/z/aGGW3TYov
+struct derived;
+extern derived d;
+struct base {
+    virtual ~base() = default;
+    operator derived&() { return d; }
+};
+
+struct derived : base {};
+
+derived d;
+} // namespace
+
 struct Thing {};
 beman::optional::optional<Thing&> process() {
     static Thing t;
     return t;
+}
+
+TEST(OptionalRefTest, BaseDerivedCastConstruction) {
+    base                                b;
+    derived&                            dref(b); // ok
+    beman::optional::optional<derived&> dopt1(b);
+    beman::optional::optional<derived&> dopt2(dref);
+    EXPECT_TRUE(dopt1.has_value());
+    EXPECT_TRUE(dopt2.has_value());
 }
 
 TEST(OptionalRefTest, Assignment) {

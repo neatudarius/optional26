@@ -1104,7 +1104,11 @@ class optional<T&> {
                  !(std::is_same_v<std::remove_cvref_t<U>, optional>) &&
                  !detail::reference_constructs_from_temporary_v<T&, U>)
     constexpr explicit(!std::is_convertible_v<U, T&>) optional(U&& u) noexcept(std::is_nothrow_constructible_v<T&, U>)
-        : value_(std::addressof(static_cast<T&>(std::forward<U>(u)))) {}
+    { //  Creates a variable, \tcode{r}, as if by \tcode{T\& r(std::forward<Arg>(arg));} and then initializes
+      //  \exposid{val} with \tcode{addressof(r)}
+        T& r(std::forward<U>(u));
+        value_ = std::addressof(r);
+    }
 
     template <class U>
         requires(std::is_constructible_v<T&, U> && !(std::is_same_v<std::remove_cvref_t<U>, in_place_t>) &&
@@ -1215,7 +1219,11 @@ template <class Arg>
     requires(std::is_constructible_v<T&, std::remove_cv_t<Arg>> &&
              !detail::reference_constructs_from_temporary_v<T&, Arg>)
 constexpr optional<T&>::optional(in_place_t, Arg&& arg)
-    : value_(std::addressof(static_cast<T&>(std::forward<Arg>(arg)))) {}
+{ //  Creates a variable, \tcode{r}, as if by \tcode{T\& r(std::forward<Arg>(arg));} and then initializes \exposid{val}
+  //  with \tcode{addressof(r)}
+    T& r(std::forward<Arg>(arg));
+    value_ = std::addressof(r);
+}
 
 // Clang is unhappy with the out-of-line definition
 //

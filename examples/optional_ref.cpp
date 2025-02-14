@@ -44,7 +44,7 @@ beman::optional::optional<Cat&> api() {
 
 } // namespace std26
 
-int main() {
+int example1() {
     // Example from P2988R5: optional reference.
     [[maybe_unused]] Cat*                            old_cat = std17::api();
     [[maybe_unused]] beman::optional::optional<Cat&> new_cat = std26::api();
@@ -52,6 +52,29 @@ int main() {
     return 0;
 }
 
+
+struct derived;
+extern derived d;
+struct base {
+    virtual ~base() = default;
+    operator derived&() { return d; }
+};
+
+struct derived : base {};
+
+derived d;
+
+int example2() {
+    base                                b;
+    derived&                            dref(b); // ok
+    beman::optional::optional<derived&> dopt(b);
+    return 0;
+}
+
+int main() {
+    example1();
+    example2();
+}
 // # build example:
 // $ cmake --workflow --preset gcc-14
 //
