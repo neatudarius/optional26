@@ -1095,7 +1095,7 @@ class optional<T&> {
     constexpr optional(const optional& rhs) noexcept = default;
 
     template <class Arg>
-        requires(std::is_constructible_v<T&, std::remove_cv_t<Arg>> &&
+        requires(std::is_constructible_v<T&, Arg> &&
                  !detail::reference_constructs_from_temporary_v<T&, Arg>)
     constexpr explicit optional(in_place_t, Arg&& arg);
 
@@ -1216,7 +1216,7 @@ constexpr optional<T&>::optional(nullopt_t) noexcept : value_(nullptr) {}
 
 template <class T>
 template <class Arg>
-    requires(std::is_constructible_v<T&, std::remove_cv_t<Arg>> &&
+    requires(std::is_constructible_v<T&, Arg> &&
              !detail::reference_constructs_from_temporary_v<T&, Arg>)
 constexpr optional<T&>::optional(in_place_t, Arg&& arg)
 { //  Creates a variable, \tcode{r}, as if by \tcode{T\& r(std::forward<Arg>(arg));} and then initializes \exposid{val}
