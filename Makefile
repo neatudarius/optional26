@@ -166,7 +166,8 @@ lint-manual: ## Run all manual tools in pre-commit
 .PHONY: coverage
 coverage: ## Build and run the tests with the GCOV profile and process the results
 coverage: venv
-	$(MAKE) CONFIG=Gcov test
+	$(ACTIVATE) cmake --build $(_build_path) --config Gcov
+	$(ACTIVATE) ctest --build-config Gcov --output-on-failure --test-dir $(_build_path)
 	$(ACTIVATE) cmake --build $(_build_path) --config Gcov --target process_coverage
 
 # Help target
