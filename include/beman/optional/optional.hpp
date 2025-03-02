@@ -1095,17 +1095,17 @@ class optional<T&> {
     constexpr optional(const optional& rhs) noexcept = default;
 
     template <class Arg>
-        requires(std::is_constructible_v<T&, Arg> &&
-                 !detail::reference_constructs_from_temporary_v<T&, Arg>)
+        requires(std::is_constructible_v<T&, Arg> && !detail::reference_constructs_from_temporary_v<T&, Arg>)
     constexpr explicit optional(in_place_t, Arg&& arg);
 
     template <class U>
         requires(std::is_constructible_v<T&, U> && !(std::is_same_v<std::remove_cvref_t<U>, in_place_t>) &&
                  !(std::is_same_v<std::remove_cvref_t<U>, optional>) &&
                  !detail::reference_constructs_from_temporary_v<T&, U>)
-    constexpr explicit(!std::is_convertible_v<U, T&>) optional(U&& u) noexcept(std::is_nothrow_constructible_v<T&, U>)
-    { //  Creates a variable, \tcode{r}, as if by \tcode{T\& r(std::forward<Arg>(arg));} and then initializes
-      //  \exposid{val} with \tcode{addressof(r)}
+    constexpr explicit(!std::is_convertible_v<U, T&>) optional(U&& u) noexcept(
+        std::is_nothrow_constructible_v<T&, U>) { //  Creates a variable, \tcode{r}, as if by \tcode{T\&
+                                                  //  r(std::forward<Arg>(arg));} and then initializes \exposid{val}
+                                                  //  with \tcode{addressof(r)}
         T& r(std::forward<U>(u));
         value_ = std::addressof(r);
     }
@@ -1216,11 +1216,10 @@ constexpr optional<T&>::optional(nullopt_t) noexcept : value_(nullptr) {}
 
 template <class T>
 template <class Arg>
-    requires(std::is_constructible_v<T&, Arg> &&
-             !detail::reference_constructs_from_temporary_v<T&, Arg>)
-constexpr optional<T&>::optional(in_place_t, Arg&& arg)
-{ //  Creates a variable, \tcode{r}, as if by \tcode{T\& r(std::forward<Arg>(arg));} and then initializes \exposid{val}
-  //  with \tcode{addressof(r)}
+    requires(std::is_constructible_v<T&, Arg> && !detail::reference_constructs_from_temporary_v<T&, Arg>)
+constexpr optional<T&>::optional(
+    in_place_t, Arg&& arg) { //  Creates a variable, \tcode{r}, as if by \tcode{T\& r(std::forward<Arg>(arg));} and
+                             //  then initializes \exposid{val} with \tcode{addressof(r)}
     T& r(std::forward<Arg>(arg));
     value_ = std::addressof(r);
 }
