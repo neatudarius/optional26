@@ -52,7 +52,6 @@ int example1() {
     return 0;
 }
 
-
 struct derived;
 extern derived d;
 struct base {
