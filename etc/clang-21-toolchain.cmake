@@ -1,5 +1,5 @@
 # cmake-format: off
-# etc/clang-20-toolchain.cmake -*-cmake-*-
+# etc/clang-21-toolchain.cmake -*-cmake-*-
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 # cmake-format: on
 
