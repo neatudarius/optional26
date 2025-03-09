@@ -1,10 +1,14 @@
 name: CI Tests
 on:
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   push:
-    branches: [main]
   pull_request:
-    branches: [main]
+  schedule:
+    # minute hour day month day-of-week
+    # Run at 12:25 UTC every day
+    - cron: '25 12 * * *'
+
 jobs:
   build:
     name: ${{ matrix.config.name }}
@@ -13,6 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
+          - {name: "Ubuntu Clang 21", os: ubuntu-24.04, toolchain: "clang-21", clang_version: 21, installed_clang_version: 17, cmake_args: "-G \"Ninja Multi-Config\" -DCMAKE_CONFIGURATION_TYPES=\"RelWithDebInfo;Asan\" "}
           - {name: "Ubuntu Clang 20", os: ubuntu-24.04, toolchain: "clang-20", clang_version: 20, installed_clang_version: 17, cmake_args: "-G \"Ninja Multi-Config\" -DCMAKE_CONFIGURATION_TYPES=\"RelWithDebInfo;Asan\" "}
           # Note: clang-19 + Asan setup causes errors on some platforms. Temporary skip some checks via .asan_options.
           - {name: "Ubuntu Clang 19", os: ubuntu-24.04, toolchain: "clang-19", clang_version: 19, installed_clang_version: 17, cmake_args: "-G \"Ninja Multi-Config\" -DCMAKE_CONFIGURATION_TYPES=\"RelWithDebInfo;Asan\" ", asan_options: "new_delete_type_mismatch=0"}
@@ -134,3 +139,30 @@ jobs:
         with:
           file: ${{runner.workspace}}/optional/.build/coverage.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  create-issue-when-fault:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: failure() && github.event_name == 'schedule'
+    steps:
+      # See https://github.com/cli/cli/issues/5075
+      - uses: actions/checkout@v4
+      - name: Create issue
+        run: |
+          issue_num=$(gh issue list -s open -S "[SCHEDULED-BUILD] Build & Test failure" -L 1 --json number | jq 'if length == 0 then -1 else .[0].number end')
+
+          body="**Build-and-Test Failure Report**
+          - **Time of Failure**: $(date -u '+%B %d, %Y, %H:%M %Z')
+          - **Commit**: [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
+          - **Action Run**: [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+          The scheduled build-and-test triggered by cron has failed.
+          Please investigate the logs and recent changes associated with this commit or rerun the workflow if you believe this is an error."
+
+          if [[ $issue_num -eq -1 ]]; then
+            gh issue create --repo ${{ github.repository }} --title "[SCHEDULED-BUILD] Build & Test failure" --body "$body"
+          else
+            gh issue comment --repo ${{ github.repository }} $issue_num --body "$body"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}

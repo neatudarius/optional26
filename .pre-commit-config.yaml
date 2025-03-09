@@ -38,8 +38,8 @@ repos:
     rev: v2.3.0
     hooks:
       - id: codespell
-        args: ['-I', '.codespell_ignore', '--uri-ignore-words-list']
-        exclude: |
+        args: ['-I', '.codespell_ignore', '--uri-ignore-words-list', '*']
+        exclude: >
           (?x)^(
             papers/.*
           )$
