@@ -18,19 +18,6 @@ option(
     ${PROJECT_IS_TOP_LEVEL}
 )
 
-# Build the tests if enabled via the option OPTIONAL_ENABLE_TESTING
-if(OPTIONAL_ENABLE_TESTING)
-    # Fetch GoogleTest
-    FetchContent_Declare(
-        googletest
-        EXCLUDE_FROM_ALL
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG
-            e39786088138f2749d64e9e90e0f9902daa77c40 # release-1.15.0
-    )
-    FetchContent_MakeAvailable(googletest)
-endif()
-
 set(CMAKE_VERIFY_INTERFACE_HEADER_SETS ON)
 
 # Create the library target and named header set for beman_optional
