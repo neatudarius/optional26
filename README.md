@@ -8,10 +8,7 @@ SPDX-License-Identifier: 2.0 license with LLVM exceptions
 <img src="https://github.com/bemanproject/beman/blob/main/images/logos/beman_logo-beman_library_production_ready_api_may_undergo_changes.png" style="width:5%; height:auto;"> ![CI Tests](https://github.com/bemanproject/optional/actions/workflows/ci.yml/badge.svg) [![Coverage](https://coveralls.io/repos/github/bemanproject/optional/badge.svg?branch=main)](https://coveralls.io/github/bemanproject/optional?branch=main)
 <!-- markdownlint-enable -->
 
-This repository implements `std::optional` extensions targeting C++26. The `beman.optional` library aims to evaluate
-the stability, the usability, and the performance of these proposed changes before they are officially adopted by WG21
-into the C++ Working Draft. Additionally, it allows developers to use these new features before they are implemented in
-major standard library compilers.
+This repository implements `std::optional` extensions targeting C++26. The `beman.optional` library aims to evaluate the stability, the usability, and the performance of these proposed changes before they are officially adopted by WG21 into the C++ Working Draft. Additionally, it allows developers to use these new features before they are implemented in major standard library compilers.
 
 **Implements**: [Give *std::optional* Range Support (P3168R2)](https://wg21.link/P3168R2) and [`std::optional<T&>` (P2988R5)](https://wg21.link/P2988R5)
 
@@ -27,11 +24,9 @@ Documentation and associated papers are licensed with the Creative Commons Attri
 
 // SPDX-License-Identifier: CC-BY-4.0
 
-The intent is that the source and documentation are available for use by people implementing their own optional types
-as well as people using the optional presented here as-is.
+The intent is that the source and documentation are available for use by people implementing their own optional types as well as people using the optional presented here as-is.
 
-The README itself is licensed with CC0 1.0 Universal. Copy the contents and incorporate in your own work as you see
-fit.
+The README itself is licensed with CC0 1.0 Universal. Copy the contents and incorporate in your own work as you see fit.
 
 // SPDX-License-Identifier: CC0-1.0
 
@@ -68,7 +63,7 @@ Full code can be found in [./examples/range_loop.cpp](./examples/range_loop.cpp)
 ### optional_ref
 
 The next code snippet shows optional reference support added in [`std::optional<T&>`
-(P2988R5)](https://wg21.link/P2988R5):
+(P2988)](https://wg21.link/P2988):
 
 ```cpp
 #include <beman/optional/optional.hpp>
@@ -107,8 +102,7 @@ Default build: `C++23`. Please check `etc/${compiler}-flags.cmake`.
 
 ### Dependencies
 
-This project is mainly tested on `Ubuntu 22.04` and `Ubuntu 24.04`, but it should be as portable as CMake is. This
-project has no C or C++ dependencies.
+This project is mainly tested on `Ubuntu 22.04` and `Ubuntu 24.04`, but it should be as portable as CMake is. This project has no C or C++ dependencies.
 
 Build-time dependencies:
 
@@ -128,14 +122,29 @@ apt-get install                           \
   clang-18 clang++-18 clang-17 clang++-17
 ```
 
+<details>
+<summary> Build GoogleTest dependency from github.com </summary>
+
+If you do not have GoogleTest installed on your development system, you may
+optionally configure this project to download a known-compatible release of
+GoogleTest from source and build it as well.
+
+```shell
+cmake -B build -S . -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=./cmake/use-fetch-content.cmake
+```
+
+The precise version of GoogleTest that will be used is maintained in
+`./lockfile.json`.
+
+</details>
+
 ### Instructions
 
 Full set of supported toolchains can be found in [.github/workflows/ci.yml](.github/workflows/ci.yml).
 
 #### Preset CMake Flows
 
-This project strives to be as normal and simple a CMake project as possible. This build workflow in particular will
-work, producing a static `beman_optional` library, ready to package:
+This project strives to be as normal and simple a CMake project as possible. This build workflow in particular will work, producing a static `beman_optional` library, ready to package:
 
 ```shell
 # List available preset configurations:
@@ -238,14 +247,9 @@ No tests were found!!!
 
 #### Pre-Commit for Linting
 
-Various linting tools are configured and installed via the [pre-commit](https://pre-commit.com/) framework. This
-requires a working python environment, but also allows the tools, such as clang-format and cmake-lint, to be versioned
-on a per project basis rather than being installed globally. Version changes in lint checks often means differences in
-success or failure between the versions in CI and the versions used by a developer. By using the same configurations,
-this problem is avoided.
+Various linting tools are configured and installed via the [pre-commit](https://pre-commit.com/) framework. This requires a working python environment, but also allows the tools, such as clang-format and cmake-lint, to be versioned on a per project basis rather than being installed globally. Version changes in lint checks often means differences in success or failure between the versions in CI and the versions used by a developer. By using the same configurations, this problem is avoided.
 
-In order to set up a python environment, using a python virtual environment can simplify maintaining different
-configurations between projects. There is no particular dependency on a particular python3 version.
+In order to set up a python environment, using a python virtual environment can simplify maintaining different configurations between projects. There is no particular dependency on a particular python3 version.
 
 ##### Creating and configuring a venv
 
@@ -258,8 +262,7 @@ python3 -m venv .venv
 . .venv/bin/activate && exec bash
 ```
 
-This will create the venv, install the python and python development tools, and run bash with the PATH and other
-environment variables set to use the venv preferentially.
+This will create the venv, install the python and python development tools, and run bash with the PATH and other environment variables set to use the venv preferentially.
 
 ##### Running the linting tools
 
@@ -291,3 +294,4 @@ Latest revision(s) of the papers can be built / found at:
   * issue: [#1661](https://github.com/cplusplus/papers/issues/1661)
   * LEWG:
     * Reviewed in Tokyo 2024.
+    * Forwarded by LEWG in 2025 in Hagenberg.
