@@ -149,7 +149,7 @@ function(BemanOptional_provideDependency method package_name)
                     "to FetchContent logic fetching ${BemanOptional_repo} at "
                     "${BemanOptional_tag} according to ${BemanOptional_lockfile}."
                 )
-                message(DEBUG "${BemanOptional_debug}")
+              message(STATUS "${BemanOptional_debug}")
                 FetchContent_Declare(
                     "${BemanOptional_name}"
                     GIT_REPOSITORY "${BemanOptional_repo}"
@@ -161,12 +161,13 @@ function(BemanOptional_provideDependency method package_name)
 
                 # Important! <PackageName>_FOUND tells CMake that `find_package` is
                 # not needed for this package anymore
+                message(STATUS "setting ${BemanOptional_pkgName}_FOUND to true")
                 set("${BemanOptional_pkgName}_FOUND" TRUE PARENT_SCOPE)
             endif()
         endif()
     endforeach()
 
-    set(GTest_FOUND TRUE PARENT_SCOPE)
+    # set(GTest_FOUND TRUE PARENT_SCOPE)
 endfunction()
 
 cmake_language(
