@@ -149,7 +149,7 @@ function(BemanOptional_provideDependency method package_name)
                     "to FetchContent logic fetching ${BemanOptional_repo} at "
                     "${BemanOptional_tag} according to ${BemanOptional_lockfile}."
                 )
-              message(STATUS "${BemanOptional_debug}")
+                message(STATUS "${BemanOptional_debug}")
                 FetchContent_Declare(
                     "${BemanOptional_name}"
                     GIT_REPOSITORY "${BemanOptional_repo}"
