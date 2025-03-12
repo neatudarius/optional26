@@ -2,9 +2,6 @@
 # Disable inline html linter is needed for <details> <summary>
 MD033: false
 
-# MD013/line-length : Line length : https://github.com/DavidAnson/markdownlint/blob/v0.35.0/doc/md013.md
-MD013: false
-
 # MD024/no-duplicate-heading : https://github.com/DavidAnson/markdownlint/blob/main/doc/md024.md
 # Supress warning about the same heading twice unless they are in the same block
 MD024:

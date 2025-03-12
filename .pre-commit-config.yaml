@@ -31,6 +31,7 @@ repos:
     rev: v0.43.0
     hooks:
     - id: markdownlint
+      args: ['--disable', 'MD013', ' --']
       exclude: ^papers/
 
     # Config file: .codespell_ignore
