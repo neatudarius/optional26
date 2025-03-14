@@ -18,19 +18,6 @@ option(
     ${PROJECT_IS_TOP_LEVEL}
 )
 
-# Build the tests if enabled via the option OPTIONAL_ENABLE_TESTING
-if(OPTIONAL_ENABLE_TESTING)
-    # Fetch GoogleTest
-    FetchContent_Declare(
-        googletest
-        EXCLUDE_FROM_ALL
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG
-            e39786088138f2749d64e9e90e0f9902daa77c40 # release-1.15.0
-    )
-    FetchContent_MakeAvailable(googletest)
-endif()
-
 set(CMAKE_VERIFY_INTERFACE_HEADER_SETS ON)
 
 # Create the library target and named header set for beman_optional
@@ -41,18 +28,29 @@ target_sources(
 )
 
 if(OPTIONAL_ENABLE_TESTING)
-    # Create the library target and named header set for testing beman_optional
-    # and mark the set private
-    add_executable(beman_optional_test)
-    target_sources(
-        beman_optional_test
-        PRIVATE
-            FILE_SET beman_optional_test_headers
-            TYPE HEADERS
-            BASE_DIRS tests
-    )
-
-    add_subdirectory(tests/beman/optional)
+    find_package(GTest QUIET)
+    if(GTest_FOUND)
+        # Create the library target and named header set for testing beman_optional
+        # and mark the set private
+        add_executable(beman_optional_test)
+        target_sources(
+            beman_optional_test
+            PRIVATE
+                FILE_SET beman_optional_test_headers
+                TYPE HEADERS
+                BASE_DIRS tests
+        )
+        # Tests
+        add_subdirectory(tests/beman/optional)
+    else()
+        message(
+            WARNING
+            "
+No provider for GTest. Unable to build tests.
+Consider using CMAKE_PROJECT_TOP_LEVEL_INCLUDES=./cmake/use-fetch-content.cmake as documented in the README.md
+"
+        )
+    endif()
 endif()
 
 add_subdirectory(include/beman/optional)

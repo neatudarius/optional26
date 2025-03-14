@@ -45,6 +45,7 @@ define run_cmake =
 	-DCMAKE_CONFIGURATION_TYPES=$(_configuration_types) \
 	-DCMAKE_INSTALL_PREFIX=$(abspath $(INSTALL_PREFIX)) \
 	-DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+	-DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="./cmake/use-fetch-content.cmake" \
 	$(_cmake_args) \
 	$(CURDIR)
 endef
